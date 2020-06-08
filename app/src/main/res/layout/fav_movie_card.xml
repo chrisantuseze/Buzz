@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="movie"
+            type="com.echrisantus.buzz.database.model.Movie" />
+        <variable
+            name="clicklistener"
+            type="com.echrisantus.buzz.adapter.MovieListener" />
+
+    </data>
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="130dp"
+            android:layout_height="260dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/appDarkBg"
+                android:onClick="@{() -> clicklistener.onClickFav(movie)}">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/poster"
+                    android:layout_width="match_parent"
+                    android:layout_height="195dp"
+                    android:layout_centerHorizontal="true"
+                    tools:src="@drawable/bloodshot"
+                    app:loadPoster="@{movie.posterPath}"
+                    app:riv_corner_radius="10dp"
+                    app:riv_mutate_background="true"
+                    app:riv_tile_mode="clamp"/>
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/poster"
+                    android:layout_marginTop="5dp"
+                    android:text="@{movie.title}"
+                    tools:text="Bloodshot"
+                    android:textColor="@color/mediaTitle"
+                    android:textStyle="bold"
+                    android:textSize="13sp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="3dp">
+
+                    <ImageView
+                        android:id="@+id/star"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@android:drawable/star_on"
+                        android:tint="@color/yellow"/>
+
+                    <TextView
+                        android:id="@+id/voteAverage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{String.valueOf(movie.voteAverage)}"
+                        tools:text="7.8"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/grayish_blue"
+                        android:layout_marginLeft="10dp"/>
+
+                    <ImageView
+                        android:id="@+id/deleteIcon"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_delete_cross"
+                        android:layout_marginLeft="35dp"
+                        android:onClick="@{() -> clicklistener.onDelIconClick(movie)}"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </RelativeLayout>
+</layout>

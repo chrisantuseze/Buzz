@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.echrisantus.buzz.ui.moviedetail.MovieDetailViewModel" />
+
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/appDarkBg"
+        android:layout_margin="10dp">
+
+        <ImageView
+            android:id="@+id/viewing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_eye"
+            android:tint="@color/grayish_blue"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"/>
+
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_below="@id/viewing">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/overview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/movie_overview"
+                    app:overview="@{viewmodel.movie.overview}"
+                    android:textColor="@color/grayish_blue"
+                    android:textSize="13sp"
+                    android:lineSpacingMultiplier="1.3"/>
+            </LinearLayout>
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/closeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Close"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/mediaTitle"
+            android:layout_below="@id/scrollView"
+            android:layout_margin="20dp"/>
+
+    </RelativeLayout>
+</layout>

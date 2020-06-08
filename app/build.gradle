@@ -1,0 +1,181 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    archivesBaseName = "Buzz"
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
+    signingConfigs {
+        Properties keyProps = new Properties()
+        keyProps.load(new FileInputStream(project.rootProject.file('keystore.properties')))
+        release {
+            storeFile file(keyProps.getProperty("RELEASE_STORE_FILE"))
+            keyAlias keyProps.getProperty("RELEASE_KEY_ALIAS", "")
+            storePassword keyProps.getProperty("RELEASE_STORE_PASSWORD", "")
+            keyPassword keyProps.getProperty("RELEASE_KEY_PASSWORD", "")
+        }
+        debug {
+            storeFile file(keyProps.getProperty("DEBUG_STORE_FILE"))
+            keyAlias keyProps.getProperty("DEBUG_KEY_ALIAS", "")
+            storePassword keyProps.getProperty("DEBUG_STORE_PASSWORD", "")
+            keyPassword keyProps.getProperty("DEBUG_KEY_PASSWORD", "")
+
+        }
+    }
+
+    defaultConfig {
+        applicationId "com.echrisantus.buzz"
+        minSdkVersion 16
+        targetSdkVersion 29
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    // Specifies one flavor dimension.
+    flavorDimensions 'default'
+    productFlavors {
+        darkMode {
+            // Assigns this product flavor to the "version" flavor dimension.
+            // If you are using only one dimension, this property is optional,
+            // and the plugin automatically assigns all the module's flavors to
+            // that dimension.
+
+            dimension 'default'
+            versionCode 1
+            versionName "1.0"
+            applicationIdSuffix ".dark"
+        }
+        lightMode {
+            dimension 'default'
+            versionCode 1
+            versionName "1.0"
+            applicationIdSuffix ".light"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            signingConfig signingConfigs.release
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "${archivesBaseName}-${variant.productFlavors[0].name}.apk"
+                }
+            }
+            lintOptions {
+                disable 'MissingTranslation'
+                disable 'DuplicateIds'
+                disable 'ExtraTranslation'
+            }
+        }
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            applicationIdSuffix ".debug"
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "${archivesBaseName}-${variant.productFlavors.name}.apk"
+                }
+            }
+            lintOptions {
+                disable 'MissingTranslation'
+                disable 'DuplicateIds'
+                disable 'ExtraTranslation'
+            }
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    //Fixes: Cannot inline bytecode built with JVM target 1.8 into bytecode that is being built with JVM target 1.6. Please specify proper '-jvm-target' option
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    sourceSets {
+        darkMode {
+            res.srcDirs = ['src/darkMode/res', 'src/darkMode/res/'] 
+            java.srcDirs = ['src/darkMode/java', 'src/darkMode/java/']
+        }
+        lightMode {
+            res.srcDirs = ['src/lightMode/res', 'src/lightMode/res/']
+            java.srcDirs = ['src/lightMode/java', 'src/lightMode/java/']
+        }
+        main {
+            assets.srcDirs = ['src/main/assets', 'src/main/assets/']
+        }
+    }
+}
+
+dependencies {
+    def dagger_version = "2.27"
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    //Navigation
+    implementation "androidx.navigation:navigation-fragment:$rootProject.navigationVersion"
+    implementation "androidx.navigation:navigation-ui:$rootProject.navigationVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.navigationVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+
+
+    // Room components
+    implementation "androidx.room:room-runtime:$rootProject.roomVersion"
+    implementation "androidx.room:room-ktx:$rootProject.roomVersion"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
+    androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.1.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    //Dagger2
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
+    //Rounded image
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //Apache commons
+    implementation 'org.apache.commons:commons-lang3:3.9'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

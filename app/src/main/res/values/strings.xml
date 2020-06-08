@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Buzz</string>
+
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="category">Category</string>
+    <string name="movie_detail">Movie Detail</string>
+    <string name="tv_detail">Tv Detail</string>
+    <string name="favourite">Favourite</string>
+    <string name="movie_overview">The near future, a time when both hope and hardships drive humanity to look to the stars and beyond. While a mysterious phenomenon menaces to destroy life on planet Earth, astronaut Roy McBride undertakes a mission across the immensity of space and its many perils to uncover the truth about a lost expedition that decades before boldly faced emptiness and silence in search of the unknown.</string>
+    <string name="tv_episode_overview">Barry considers a risky plan to save Iris from the Mirrorverse. Ralph attempts to stop Sue from making a grave mistake that could destroy her life.</string>
+    <string name="splashscreen">Splash screen</string>
+
+</resources>

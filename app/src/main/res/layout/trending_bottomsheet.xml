@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.echrisantus.buzz.ui.home.HomeViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:theme="@style/CustomAppTheme"
+        android:background="@color/appDarkBg"
+        android:layout_marginBottom="20dp">
+
+        <View
+            android:layout_width="50dp"
+            android:layout_height="3dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/grayish_blue"
+            android:layout_centerHorizontal="true"/>
+
+        <Switch
+            android:id="@+id/mediaTypeSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Movie"
+            android:textAllCaps="true"
+            android:textColor="@color/grayish_blue"
+            android:textSize="12sp"
+            android:layout_margin="30dp"
+            android:checked="true"/>
+
+        <Switch
+            android:id="@+id/timeWindowSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Day "
+            android:textAllCaps="true"
+            android:textColor="@color/grayish_blue"
+            android:textSize="12sp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="150dp"/>
+
+        <TextView
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:textSize="13sp"
+            android:textColor="@color/fontWhite"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/timeWindowSwitch"/>
+        <View
+            android:layout_width="45dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/grayish_blue"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/search"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="30dp"/>
+
+    </RelativeLayout>
+</layout>

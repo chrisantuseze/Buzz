@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.echrisantus.buzz.ui.favourite.FavouriteViewModel" />
+
+        <import type="android.view.View"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.favourite.FavouriteDetailFragment">
+
+        <RelativeLayout
+            android:id="@+id/movieLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{viewmodel.isMovie? View.VISIBLE : View.GONE}">
+
+            <ProgressBar
+                android:id="@+id/movieProgressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone"/>
+
+            <RelativeLayout
+                android:id="@+id/movieRelativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/movieBackdrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    tools:src="@drawable/bloodshot_780"
+                    android:layout_marginTop="-5dp"
+                    app:loadBackdrop="@{viewmodel.movie.backdropPath}"/>
+
+                <ImageView
+                    android:id="@+id/movieBackIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_back"
+                    android:tint="@color/fontWhite"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="12dp"/>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/movieBackdrop"
+                    android:layout_marginTop="-40dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/movieCard1"
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp"
+                            app:cardElevation="5dp"
+                            app:cardCornerRadius="5dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_below="@id/backdrop"
+                                android:background="@color/cardDarkBg"
+                                android:padding="15dp">
+
+                                <RelativeLayout
+                                    android:id="@+id/relative1"
+                                    android:layout_width="50dp"
+                                    android:layout_height="16dp"
+                                    android:background="@drawable/rectangular_oval"
+                                    android:layout_alignParentRight="true">
+
+                                    <TextView
+                                        android:id="@+id/runtime"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="11sp"
+                                        tools:text="105 min"
+                                        app:runtime="@{viewmodel.movie.runtime}"
+                                        android:textColor="@color/white"
+                                        android:layout_centerInParent="true"/>
+
+                                </RelativeLayout>
+
+                                <TextView
+                                    android:id="@+id/movieTitle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    tools:text="Bloodshot"
+                                    app:title="@{viewmodel.movie.title}"
+                                    android:textColor="@color/mediaTitle"
+                                    android:textSize="22sp"
+                                    android:textStyle="bold"
+                                    android:layout_below="@id/relative1"/>
+
+                                <TextView
+                                    android:id="@+id/movieGenre"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/movieTitle"
+                                    android:layout_marginTop="5dp"
+                                    tools:text="Adventure, Action, Sci-Fi"
+                                    app:genres="@{viewmodel.movie.genres}"
+                                    android:textColor="@color/grayish_blue"
+                                    android:textSize="12sp"/>
+
+                                <LinearLayout
+                                    android:id="@+id/movieLinear"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_below="@id/movieGenre"
+                                    android:layout_marginTop="10dp">
+
+                                    <TextView
+                                        android:id="@+id/movieVoteAverage"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        tools:text="8.7"
+                                        app:voteAverage="@{viewmodel.movie.voteAverage}"
+                                        android:textSize="22sp"
+                                        android:textColor="@color/orange"
+                                        android:textStyle="bold"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="/10"
+                                        android:textColor="@color/grayish_blue"
+                                        android:textSize="12sp"
+                                        android:layout_marginLeft="5dp"/>
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/movieOverview"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    tools:text="@string/movie_overview"
+                                    app:overview="@{viewmodel.movie.overview}"
+                                    android:textColor="@color/grayish_blue"
+                                    android:textSize="13sp"
+                                    android:lineSpacingMultiplier="1.3"
+                                    android:maxLines="6"
+                                    android:scrollHorizontally="true"
+                                    android:ellipsize="end"
+                                    android:layout_marginBottom="5dp"
+                                    android:layout_below="@id/movieLinear"
+                                    android:layout_marginTop="20dp"/>
+
+                                <TextView
+                                    android:id="@+id/movieViewMore"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="More"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/fontWhite"
+                                    android:layout_below="@id/movieOverview"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_alignParentRight="true"/>
+                                <View
+                                    android:layout_width="34dp"
+                                    android:layout_height="1dp"
+                                    android:background="@color/grayish_blue"
+                                    android:layout_marginBottom="4dp"
+                                    android:layout_marginRight="6dp"
+                                    android:layout_below="@id/movieViewMore"
+                                    android:layout_alignParentRight="true"/>
+
+
+                            </RelativeLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/movieCard2"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/movieCard1"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            app:cardElevation="5dp"
+                            app:cardCornerRadius="5dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_below="@id/backdrop"
+                                android:background="@color/cardDarkBg"
+                                android:padding="10dp">
+
+                                <LinearLayout
+                                    android:id="@+id/movieLinear2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_centerVertical="true">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Released: "
+                                        android:textSize="13sp"
+                                        android:textColor="@color/yellow"/>
+
+                                    <ImageView
+                                        android:id="@+id/status"
+                                        android:layout_width="15dp"
+                                        android:layout_height="15dp"
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginTop="2dp"
+                                        tools:src="@drawable/ic_wrong"
+                                        android:tint="@color/mediaTitle"
+                                        app:status="@{viewmodel.movie.status}"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/movieLinear3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_centerVertical="true">
+
+                                    <ImageView
+                                        android:layout_width="15dp"
+                                        android:layout_height="15dp"
+                                        android:layout_marginTop="2dp"
+                                        android:src="@drawable/ic_date"
+                                        android:tint="@color/fontWhite"/>
+
+                                    <TextView
+                                        android:id="@+id/releaseDate"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="10dp"
+                                        tools:text="26-05-2020"
+                                        app:releaseDate="@{viewmodel.movie.releaseDate}"
+                                        android:textSize="12sp"
+                                        android:textColor="@color/grayish_blue"/>
+
+                                </LinearLayout>
+
+                            </RelativeLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+                    </RelativeLayout>
+                </ScrollView>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/tvLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{viewmodel.isMovie? View.GONE : View.VISIBLE}">
+
+            <ProgressBar
+                android:id="@+id/tvProgressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone"/>
+
+            <RelativeLayout
+                android:id="@+id/tvRelativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/tvBackdrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:layout_marginTop="-5dp"
+                    tools:src="@drawable/the_flash_780"
+                    app:loadBackdrop="@{viewmodel.tv.backdropPath}"/>
+
+                <ImageView
+                    android:id="@+id/tvBackIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_back"
+                    android:tint="@color/fontWhite"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="12dp"/>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvBackdrop"
+                    android:layout_marginTop="-40dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/tvCard1"
+                            android:layout_width="match_parent"
+                            android:layout_height="310dp"
+                            app:cardElevation="5dp"
+                            app:cardCornerRadius="5dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_below="@id/tvBackdrop"
+                                android:background="@color/cardDarkBg"
+                                android:paddingLeft="15dp"
+                                android:paddingRight="15dp"
+                                android:paddingBottom="15dp">
+
+                                <LinearLayout
+                                    android:id="@+id/linearEpisode"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginTop="5dp">
+
+                                    <RelativeLayout
+                                        android:layout_width="26dp"
+                                        android:layout_height="26dp"
+                                        android:background="@drawable/rating_circle"
+                                        android:backgroundTint="@color/orange"
+                                        android:layout_marginRight="-5dp">
+
+                                        <TextView
+                                            android:id="@+id/numberOfSeasons"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="13sp"
+                                            tools:text="6"
+                                            app:numberOfSeasons="@{viewmodel.tv.numberOfSeasons}"
+                                            android:textColor="@color/white"
+                                            android:layout_centerInParent="true"/>
+                                    </RelativeLayout>
+
+                                    <RelativeLayout
+                                        android:layout_width="55dp"
+                                        android:layout_height="15dp"
+                                        android:background="@drawable/rectangular_right_half_oval"
+                                        android:backgroundTint="@color/orange"
+                                        android:layout_marginRight="5dp"
+                                        android:layout_gravity="center_vertical">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="11sp"
+                                            android:text="seasons"
+                                            android:textColor="@color/white"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginLeft="5dp"/>
+
+                                    </RelativeLayout>
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/tvTitle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    tools:text="The Flash"
+                                    app:title="@{viewmodel.tv.title}"
+                                    android:textColor="@color/mediaTitle"
+                                    android:textSize="22sp"
+                                    android:textStyle="bold"
+                                    android:layout_below="@id/linearEpisode"/>
+
+                                <TextView
+                                    android:id="@+id/tvGenre"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/tvTitle"
+                                    android:layout_marginTop="5dp"
+                                    tools:text="Drama, Action, Sci-Fi"
+                                    app:genres="@{viewmodel.tv.genres}"
+                                    android:textColor="@color/grayish_blue"
+                                    android:textSize="12sp"/>
+
+                                <LinearLayout
+                                    android:id="@+id/tvLinear"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_below="@id/tvGenre"
+                                    android:layout_marginTop="10dp">
+
+                                    <TextView
+                                        android:id="@+id/tvVoteAverage"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        tools:text="8.7"
+                                        app:voteAverage="@{viewmodel.tv.voteAverage}"
+                                        android:textSize="22sp"
+                                        android:textColor="@color/orange"
+                                        android:textStyle="bold"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="/10"
+                                        android:textColor="@color/grayish_blue"
+                                        android:textSize="12sp"
+                                        android:layout_marginLeft="5dp"/>
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/tvOverview"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    tools:text="@string/movie_overview"
+                                    app:overview="@{viewmodel.tv.overview}"
+                                    android:textColor="@color/grayish_blue"
+                                    android:textSize="13sp"
+                                    android:lineSpacingMultiplier="1.3"
+                                    android:maxLines="5"
+                                    android:scrollHorizontally="true"
+                                    android:ellipsize="end"
+                                    android:layout_below="@id/tvLinear"
+                                    android:layout_marginTop="20dp"/>
+
+                                <TextView
+                                    android:id="@+id/tvViewMore"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="More"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/fontWhite"
+                                    android:layout_below="@id/tvOverview"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_alignParentRight="true"/>
+                                <View
+                                    android:layout_width="34dp"
+                                    android:layout_height="1dp"
+                                    android:background="@color/grayish_blue"
+                                    android:layout_marginBottom="8dp"
+                                    android:layout_marginRight="7dp"
+                                    android:layout_below="@id/tvViewMore"
+                                    android:layout_alignParentRight="true"/>
+
+
+                            </RelativeLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/tvCard2"
+                            android:layout_width="match_parent"
+                            android:layout_height="110dp"
+                            android:layout_below="@id/tvCard1"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            app:cardElevation="5dp"
+                            app:cardCornerRadius="5dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_below="@id/backdrop"
+                                android:background="@color/cardDarkBg"
+                                android:paddingTop="10dp"
+                                android:paddingLeft="15dp"
+                                android:paddingRight="15dp">
+
+                                <LinearLayout
+                                    android:id="@+id/tvLinear1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/tag1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Last episode to air:"
+                                        android:textSize="12sp"
+                                        android:layout_gravity="center_vertical"
+                                        android:textColor="@color/mediaTitle"/>
+
+                                    <RelativeLayout
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:background="@drawable/rating_circle"
+                                        android:backgroundTint="@color/ratingCircleBack"
+                                        android:layout_marginLeft="5dp">
+
+                                        <TextView
+                                            android:id="@+id/lastEpisodeToAir"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerInParent="true"
+                                            tools:text="16"
+                                            app:lastEpisodeToAir="@{viewmodel.tv.episodeNumber}"
+                                            android:textColor="@color/cardDarkBg"
+                                            android:textSize="11sp"
+                                            android:textStyle="bold" />
+
+                                    </RelativeLayout>
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/tag2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="First air date:"
+                                    android:textSize="13sp"
+                                    android:textColor="@color/mediaTitle"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_below="@id/tvLinear1"/>
+
+                                <LinearLayout
+                                    android:id="@+id/tvLinear2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_below="@id/tag2"
+                                    android:layout_marginTop="5dp">
+
+                                    <ImageView
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:layout_marginTop="2dp"
+                                        android:src="@drawable/ic_date"
+                                        android:tint="@color/fontWhite"/>
+
+                                    <TextView
+                                        android:id="@+id/firstAirDate"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="10dp"
+                                        tools:text="26-05-2020"
+                                        app:firstAirDate="@{viewmodel.tv.firstAirDate}"
+                                        android:textSize="11sp"
+                                        android:textColor="@color/grayish_blue"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginTop="30dp">
+
+                                    <TextView
+                                        android:id="@+id/tag3"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Last air date:"
+                                        android:textSize="13sp"
+                                        android:textColor="@color/mediaTitle"
+                                        android:layout_below="@id/linear2"/>
+
+                                    <LinearLayout
+                                        android:id="@+id/linear3"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:layout_below="@id/tag2"
+                                        android:layout_marginTop="5dp">
+
+                                        <ImageView
+                                            android:layout_width="13dp"
+                                            android:layout_height="13dp"
+                                            android:layout_marginTop="2dp"
+                                            android:src="@drawable/ic_date"
+                                            android:tint="@color/fontWhite"/>
+
+                                        <TextView
+                                            android:id="@+id/lastAirDate"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="10dp"
+                                            tools:text="26-05-2020"
+                                            app:lastAirDate="@{viewmodel.tv.lastAirDate}"
+                                            android:textSize="11sp"
+                                            android:textColor="@color/grayish_blue"/>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </RelativeLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+                    </RelativeLayout>
+                </ScrollView>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>

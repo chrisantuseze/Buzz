@@ -1,0 +1,42 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="512dp"
+    android:height="512dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+  <path
+      android:pathData="m362,181.867 l-77,54.56 -43,65.44h120l75,-52 45,-68z"
+      android:fillColor="#32393f"/>
+  <path
+      android:pathData="m75,181.867c-2.533,0 -45,38.687 -45,45v60c0,8.284 6.716,15 15,15h77l100,-60 20,-60z"
+      android:fillColor="#3b4a51"/>
+  <path
+      android:pathData="m490.615,117.94c8.113,-1.679 13.333,-9.628 11.646,-17.743l-18.323,-88.115c-1.685,-8.106 -9.624,-13.313 -17.727,-11.635l-132.329,27.393 57.118,58.741 84.927,34.399z"
+      android:fillColor="#dfe7f4"/>
+  <path
+      android:pathData="m216.267,52.187 l-117.615,24.347 48.348,63.613 93.679,29.515 117.624,-24.341 -66.303,-58.74z"
+      android:fillColor="#f0f7ff"/>
+  <path
+      android:pathData="m242,181.867 l-120,120h120l120,-120z"
+      android:fillColor="#dfe7f4"/>
+  <path
+      android:pathData="m497,181.867h-15l-120,120h135c8.284,0 15,-6.716 15,-15v-90c0,-8.285 -6.716,-15 -15,-15z"
+      android:fillColor="#c7cfe1"/>
+  <path
+      android:pathData="m23.636,92.063c-8.112,1.679 -13.332,9.628 -11.645,17.742l12.214,58.738 50.157,35.218c1.007,0 2.03,-0.102 3.056,-0.314l163.261,-33.785 -142.027,-93.128z"
+      android:fillColor="#596c76"/>
+  <path
+      android:pathData="m475.927,120.98 l-142.045,-93.14 -117.615,24.347 142.036,93.134z"
+      android:fillColor="#3b4a51"/>
+  <path
+      android:pathData="m30,271.867v225c0,8.28 6.72,15 15,15h452c8.28,0 15,-6.72 15,-15v-225z"
+      android:fillColor="#76e2f8"/>
+  <path
+      android:pathData="m512,271.867v225c0,8.28 -6.72,15 -15,15h-226v-240z"
+      android:fillColor="#66c0ee"/>
+  <path
+      android:pathData="m45,241.867c-24.813,0 -45,-20.187 -45,-45s20.187,-45 45,-45 45,20.187 45,45 -20.187,45 -45,45z"
+      android:fillColor="#c7cfe1"/>
+  <path
+      android:pathData="M45,196.867m-15,0a15,15 0,1 1,30 0a15,15 0,1 1,-30 0"
+      android:fillColor="#3b4a51"/>
+</vector>

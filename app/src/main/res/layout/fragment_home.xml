@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.echrisantus.buzz.ui.home.HomeViewModel" />
+
+        <import type="org.apache.commons.lang3.StringUtils"/>
+        <import type="android.view.View"/>
+        <import type="com.echrisantus.buzz.network.model.Category"/>
+        <import type="com.echrisantus.buzz.network.model.MediaType"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        tools:context=".ui.home.HomeFragment">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+
+        <androidx.cardview.widget.CardView
+            android:visibility="gone"
+            android:id="@+id/searchCard"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="8dp">
+
+            <RelativeLayout
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/fontWhite">
+
+                <LinearLayout
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:layout_width="0px"
+                    android:layout_height="0px"/>
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/searchview"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/fontWhite"
+                    app:iconifiedByDefault="false"
+                    app:queryHint="Search for movies or tv shows"
+                    android:layout_centerInParent="true"
+                    android:theme="@style/BuzzSearchView">
+
+                </androidx.appcompat.widget.SearchView>
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/appDarkBg">
+
+                <ImageView
+                    android:id="@+id/trendingCategory"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_menu"
+                    android:tint="@color/fontWhite"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"/>
+
+                <TextView
+                    android:id="@+id/mediaType1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Movie"
+                    android:text="@={viewmodel._mediaType}"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:textColor="@color/fontWhite"
+                    android:textSize="14sp"
+                    android:layout_centerInParent="true"/>
+
+                <ImageView
+                    android:id="@+id/mediaTypeSlider"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_slider3"
+                    android:tint="@color/fontWhite"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"/>
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/card"
+            android:layout_marginTop="20dp">
+
+            <RelativeLayout
+                android:id="@+id/linearPopular"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/category_rect_white"
+                app:active="@{StringUtils.equalsIgnoreCase(viewmodel.category, Category.POPULAR.value)}">
+
+                <TextView
+                    android:id="@+id/popular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Popular"
+                    android:textColor="@color/appDarkBg"
+                    android:textSize="13sp"
+                    android:layout_centerInParent="true"
+                    android:padding="2dp"
+                    app:active="@{StringUtils.equalsIgnoreCase(viewmodel.category, Category.POPULAR.value)}"/>
+                <View
+                    android:id="@+id/popularBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/grayish_blue"
+                    android:layout_marginTop="3dp"
+                    android:visibility="gone"/>
+<!--                    android:visibility="@{StringUtils.equalsIgnoreCase(viewmodel.category, Category.POPULAR.value)? View.VISIBLE : View.GONE}"/>-->
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/linearUpcoming"
+                android:layout_width="72dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/category_rect_white"
+                app:active="@{StringUtils.equalsIgnoreCase(viewmodel.category, Category.UPCOMING.value)}"
+                android:layout_marginRight="25dp"
+                android:visibility="@{StringUtils.equalsIgnoreCase(viewmodel._mediaType, MediaType.MOVIE.value)? View.VISIBLE : View.GONE}">
+
+                <TextView
+                    android:id="@+id/upcoming"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upcoming"
+                    android:textColor="@color/appDarkBg"
+                    android:textSize="13sp"
+                    android:padding="2dp"
+                    android:layout_centerInParent="true"
+                    app:active="@{StringUtils.equalsIgnoreCase(viewmodel.category, Category.UPCOMING.value)}"/>
+                <View
+                    android:id="@+id/upcomingBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/grayish_blue"
+                    android:layout_marginTop="3dp"
+                    android:visibility="gone"/>
+<!--                    android:visibility="@{StringUtils.equalsIgnoreCase(viewmodel.category, Category.UPCOMING.value)? View.VISIBLE : View.GONE}"/>-->
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/linearTopRated"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/category_rect_white"
+                app:active="@{StringUtils.equalsIgnoreCase(viewmodel.category, Category.TOP_RATED.value)}">
+
+                <TextView
+                    android:id="@+id/topRated"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Top rated"
+                    android:textColor="@color/appDarkBg"
+                    android:textSize="13sp"
+                    android:padding="2dp"
+                    android:layout_centerInParent="true"
+                    app:active="@{StringUtils.equalsIgnoreCase(viewmodel.category, Category.TOP_RATED.value)}"/>
+                <View
+                    android:id="@+id/topRatedBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/grayish_blue"
+                    android:layout_marginTop="3dp"
+                    android:visibility="gone"/>
+                <!--                    android:visibility="@{StringUtils.equalsIgnoreCase(viewmodel.category, Category.TOP_RATED.value)? View.VISIBLE : View.GONE}"/>-->
+            </RelativeLayout>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewMovie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/linear"
+            android:layout_marginTop="20dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:visibility="@{StringUtils.equalsIgnoreCase(viewmodel._mediaType, MediaType.MOVIE.value)? View.VISIBLE : View.GONE}"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewTv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/linear"
+            android:layout_marginTop="20dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:visibility="@{StringUtils.equalsIgnoreCase(viewmodel._mediaType, MediaType.TV.value)? View.VISIBLE : View.GONE}"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_favourite"
+            android:tint="@color/fabTint"
+            app:maxImageSize="14dp"
+            app:fabSize="normal"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="20dp"/>
+
+    </RelativeLayout>
+</layout>

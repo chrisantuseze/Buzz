@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="appDarkBg">#D8D7D7</color>
+    <color name="cardDarkBg">#FFFFFF</color>
+    <color name="grayish_blue">#626874</color>
+    <color name="yellow">@color/green</color>
+
+    <color name="orange">#e15e43</color>
+    <color name="white">#F5F3F3</color>
+    <color name="black">#161720</color>
+
+    <color name="darkBlue">#19203A</color>
+    
+    <color name="green">#41C1B1</color>
+    <color name="fontWhite">@color/green</color>
+    <color name="mediaTitle">@color/darkBlue</color>
+    <color name="ratingCircleBack">@color/green</color>
+    <color name="fabTint">@color/white</color>
+
+</resources>

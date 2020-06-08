@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="guestStar"
+            type="com.echrisantus.buzz.network.model.GuestStar" />
+        <variable
+            name="clicklistener"
+            type="com.echrisantus.buzz.adapter.ItemListener" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> clicklistener.onClick(guestStar)}">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/image"
+            android:layout_width="70dp"
+            android:layout_height="65dp"
+            android:layout_centerHorizontal="true"
+            tools:src="@drawable/scofield"
+            app:loadProfile="@{guestStar.profilePath}"
+            app:riv_corner_radius="5dp"
+            app:riv_mutate_background="true"
+            app:riv_tile_mode="clamp"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Michael Scofield"
+            android:text="@{guestStar.character}"
+            android:textSize="11sp"
+            android:textColor="@color/mediaTitle"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="8dp"/>
+
+    </LinearLayout>
+</layout>
