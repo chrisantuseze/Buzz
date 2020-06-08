@@ -1,7 +1,7 @@
 # Buzz
 
 ## Brief Intro
-Buzz is a movie app that provides up-to-date list of trending, popular, top-rated and upcoming movies and tv series and allows users view the details of this movies and also tag their favorite movies/tv series as favorites.
+Buzz is a movie app that provides up-to-date list of trending, popular, top-rated and upcoming movies and tv series and allows users view the details of these movies and also tag their favorite movies/tv series as favorites.
 
 ## Technology Stack
 1. Kotlin
